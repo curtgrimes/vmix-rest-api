@@ -2,8 +2,6 @@ swagger: "2.0"
 info:
   version: "0.1"
   title: "vMix Unofficial REST API"
-host: "petstore.swagger.io"
-basePath: "/v2"
 tags:
 - name: "vmix"
   description: "High-level information about vMix"
