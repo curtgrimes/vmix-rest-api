@@ -38,10 +38,6 @@ routes.get('/', async (req, res) => {
         overlays: overlayIds,
         transitions: transitionsIds,
         status: {
-            inputs: {
-                preview: parseInt(lodashGet(vmixData, 'preview[0]._text[0]')),
-                active: parseInt(lodashGet(vmixData, 'active[0]._text[0]')),
-            },
             fadeToBlack: boolean(lodashGet(vmixData, 'version[0]._text[0]')),
             recording: boolean(lodashGet(vmixData, 'recording[0]._text[0]')),
             external: boolean(lodashGet(vmixData, 'external[0]._text[0]')),
