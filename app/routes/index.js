@@ -39,8 +39,8 @@ routes.get('/', async (req, res) => {
         transitions: transitionsIds,
         status: {
             inputs: {
-                previewInput: parseInt(lodashGet(vmixData, 'preview[0]._text[0]')),
-                activeInput: parseInt(lodashGet(vmixData, 'active[0]._text[0]')),
+                preview: parseInt(lodashGet(vmixData, 'preview[0]._text[0]')),
+                active: parseInt(lodashGet(vmixData, 'active[0]._text[0]')),
             },
             fadeToBlack: boolean(lodashGet(vmixData, 'version[0]._text[0]')),
             recording: boolean(lodashGet(vmixData, 'recording[0]._text[0]')),
