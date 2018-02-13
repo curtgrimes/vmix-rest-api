@@ -6,15 +6,13 @@ let all = async () => {
     let vmix = await vmixService();
     let overlays = lodashGet(vmix, 'overlays[0].overlay', []);
     return Promise.all(overlays.map(async (overlay) => {
-        let inputNumber, input;
-        inputNumber = lodashGet(overlay, '_text[0]', null);
-        if (inputNumber) {
-            input = await inputService.byNumber(inputNumber);
-        }
+        let input = await inputService.byId(
+                            lodashGet(overlay, '_text[0]', null)
+                    );
 
         return {
             number: lodashGet(overlay, '_attributes.number', null),
-            input: input ? input.key : null,
+            input: input ? input.inputId : null,
         };
     }));
 };

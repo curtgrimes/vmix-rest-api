@@ -21,8 +21,8 @@ routes.get('/', async (req, res) => {
     let overlays = await overlayService.all();
     let transitions = await transitionService.all();
 
-    let inputKeys = inputs.map((input) => {
-        return input.key;
+    let inputIds = inputs.map((input) => {
+        return input.inputId;
     });
 
     let overlayKeys = overlays.map((overlay) => {
@@ -36,7 +36,7 @@ routes.get('/', async (req, res) => {
     let response = {
         version: lodashGet(vmixData, 'version[0]._text[0]'),
         edition: lodashGet(vmixData, 'edition[0]._text[0]'),
-        inputs: inputKeys,
+        inputs: inputIds,
         overlays: overlayKeys,
         transitions: transitionsIds,
         preview: lodashGet(vmixData, 'preview[0]._text[0]'),
