@@ -2,6 +2,7 @@ swagger: "2.0"
 info:
   version: "0.1"
   title: "vMix Unofficial REST API"
+host: localhost:3000
 tags:
 - name: "vmix"
   description: "High-level information about vMix"
