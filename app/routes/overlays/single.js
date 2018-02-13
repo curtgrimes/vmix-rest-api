@@ -1,13 +1,13 @@
 
 const getVmixData = require('../../services/vmix');
 const lodashGet = require('lodash/get');
-const inputService = require('../../services/inputs');
+const overlayService = require('../../services/overlays');
 
 module.exports = async (req, res) => {
-    let inputs = await inputService.all();
+    let overlays = await overlayService.all();
     
-    let single = inputs.find((input) => {
-        return input.key === req.params.inputId;
+    let single = overlays.find((overlay) => {
+        return overlay.number === req.params.overlayId;
     });
 
     return single ? res.json(single) : res.sendStatus(404);
