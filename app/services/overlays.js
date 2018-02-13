@@ -11,20 +11,20 @@ let all = async () => {
                     );
 
         return {
-            number: lodashGet(overlay, '_attributes.number', null),
+            overlayId: parseInt(lodashGet(overlay, '_attributes.number', null)),
             input: input ? input.inputId : null,
         };
     }));
 };
 
-let byNumber = async (number) => {
-    // let inputs = await all();
-    // return inputs.filter((input) => {
-    //     return input.key === key;
-    // });
+let byId = async (overlayId) => {
+    let overlays = await all();
+    return overlays.find((overlay) => {
+        return overlay.overlayId === parseInt(overlayId);
+    });
 };
 
 module.exports = {
     all: all,
-    byNumber: byNumber,
+    byId: byId,
 };

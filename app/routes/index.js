@@ -25,8 +25,8 @@ routes.get('/', async (req, res) => {
         return input.inputId;
     });
 
-    let overlayKeys = overlays.map((overlay) => {
-        return overlay.number;
+    let overlayIds = overlays.map((overlay) => {
+        return overlay.overlayId;
     });
 
     let transitionsIds = transitions.map((transition) => {
@@ -37,7 +37,7 @@ routes.get('/', async (req, res) => {
         version: lodashGet(vmixData, 'version[0]._text[0]'),
         edition: lodashGet(vmixData, 'edition[0]._text[0]'),
         inputs: inputIds,
-        overlays: overlayKeys,
+        overlays: overlayIds,
         transitions: transitionsIds,
         preview: lodashGet(vmixData, 'preview[0]._text[0]'),
         active: lodashGet(vmixData, 'active[0]._text[0]'),

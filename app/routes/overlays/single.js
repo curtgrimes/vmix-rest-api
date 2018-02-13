@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     let overlays = await overlayService.all();
     
     let single = overlays.find((overlay) => {
-        return overlay.number === req.params.overlayId;
+        return overlay.overlayId === parseInt(req.params.overlayId);
     });
 
     return single ? res.json(single) : res.sendStatus(404);
