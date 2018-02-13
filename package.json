@@ -8,6 +8,7 @@
     "express": "^4.16.2",
     "lodash": "^4.17.5",
     "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "xml-js": "^1.6.2"
   },
   "devDependencies": {},
