@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app/index.js",
+  "bin": "app/index.js",
   "dependencies": {
     "boolean": "^0.1.3",
     "express": "^4.16.2",

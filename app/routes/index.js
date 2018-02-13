@@ -11,7 +11,6 @@ const transitionService = require('../services/transitions');
 const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
-
 routes.use('/inputs', inputsRoute);
 routes.use('/overlays', overlaysRoute);
 routes.use('/transitions', transitionsRoute);
