@@ -34,20 +34,26 @@ routes.get('/', async (req, res) => {
     });
 
     let response = {
-        version: lodashGet(vmixData, 'version[0]._text[0]'),
-        edition: lodashGet(vmixData, 'edition[0]._text[0]'),
         inputs: inputIds,
         overlays: overlayIds,
         transitions: transitionsIds,
-        preview: lodashGet(vmixData, 'preview[0]._text[0]'),
-        active: lodashGet(vmixData, 'active[0]._text[0]'),
-        fadeToBlack: boolean(lodashGet(vmixData, 'version[0]._text[0]')),
-        recording: boolean(lodashGet(vmixData, 'recording[0]._text[0]')),
-        external: boolean(lodashGet(vmixData, 'external[0]._text[0]')),
-        streaming: boolean(lodashGet(vmixData, 'streaming[0]._text[0]')),
-        playList: boolean(lodashGet(vmixData, 'playList[0]._text[0]')),
-        multiCorder: boolean(lodashGet(vmixData, 'multiCorder[0]._text[0]')),
-        fullscreen: boolean(lodashGet(vmixData, 'fullscreen[0]._text[0]')),
+        status: {
+            inputs: {
+                previewInput: parseInt(lodashGet(vmixData, 'preview[0]._text[0]')),
+                activeInput: parseInt(lodashGet(vmixData, 'active[0]._text[0]')),
+            },
+            fadeToBlack: boolean(lodashGet(vmixData, 'version[0]._text[0]')),
+            recording: boolean(lodashGet(vmixData, 'recording[0]._text[0]')),
+            external: boolean(lodashGet(vmixData, 'external[0]._text[0]')),
+            streaming: boolean(lodashGet(vmixData, 'streaming[0]._text[0]')),
+            playlist: boolean(lodashGet(vmixData, 'playList[0]._text[0]')),
+            multiCorder: boolean(lodashGet(vmixData, 'multiCorder[0]._text[0]')),
+            fullscreen: boolean(lodashGet(vmixData, 'fullscreen[0]._text[0]')),
+        },
+        vmix: {
+            version: lodashGet(vmixData, 'version[0]._text[0]'),
+            edition: lodashGet(vmixData, 'edition[0]._text[0]'),
+        },
     };
     res.json(response); 
 });
