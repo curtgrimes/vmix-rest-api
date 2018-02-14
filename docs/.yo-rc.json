@@ -4,7 +4,7 @@
     "importedSpec": "swagger.yaml",
     "name": "vMix REST",
     "repo": "curtgrimes/vmix-rest-api",
-    "splitSpec": true,
+    "splitSpec": false,
     "samples": true,
     "installSwaggerUI": true
   }
