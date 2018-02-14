@@ -16,7 +16,7 @@ This is a REST API that developers can use to interact with the <a href="https:/
 ## Features
 * Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest) that exposes the REST API on a port on localhost
 * [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) that makes it easy to get inputs, overlays, transitions, and make actions
-* Built-in remote access to the REST API with access token authentication
+* (TODO) Built-in remote access to the REST API with access token authentication
 
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
