@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "node"
+install:
+  - npm --prefix ./docs install
 deploy:
   - skip_cleanup: true
     provider: script
