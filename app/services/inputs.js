@@ -3,7 +3,7 @@ const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
 let all = async () => {
-    const vmixData = await vmixService();
+    const vmixData = await vmixService.getData();
     const inputs = lodashGet(vmixData, 'inputs[0].input', []);
     
     const activeInputId = parseInt(lodashGet(vmixData, 'active[0]._text[0]'));
@@ -40,7 +40,14 @@ let byId = async (inputId) => {
     });
 };
 
+let makeActive = (inputId) => {
+    return vmixService.exec('CutDirect', inputId);
+};
+
 module.exports = {
     all: all,
     byId: byId,
+    makeActive: makeActive,
+    PREVIEW_INPUT_ID: 0,
+    ACTIVE_INPUT_ID: -1,
 };

@@ -1,5 +1,5 @@
 const vmix = require('express').Router();
-const vmixService = require('../../services/vmix');
+const vmixService = require('../../services/vmix').getData;
 const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 

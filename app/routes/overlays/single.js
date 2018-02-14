@@ -1,6 +1,4 @@
 
-const getVmixData = require('../../services/vmix');
-const lodashGet = require('lodash/get');
 const overlayService = require('../../services/overlays');
 
 module.exports = async (req, res) => {

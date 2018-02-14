@@ -1,4 +1,3 @@
-const request = require('request');
 const transitionService = require('../../services/transitions');
 
 module.exports = async (req, res) => {

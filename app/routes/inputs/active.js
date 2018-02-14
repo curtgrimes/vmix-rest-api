@@ -1,4 +1,4 @@
-const getVmixData = require('../../services/vmix');
+const getVmixData = require('../../services/vmix').getData();
 const inputService = require('../../services/inputs');
 
 module.exports = async (req, res) => {

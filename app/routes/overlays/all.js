@@ -1,4 +1,3 @@
-const request = require('request');
 const overlayService = require('../../services/overlays');
 
 module.exports = async (req, res) => {

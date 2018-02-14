@@ -1,4 +1,4 @@
-const vmixService = require('./vmix');
+const vmixService = require('./vmix').getData;
 const lodashGet = require('lodash/get');
 
 let all = async () => {
@@ -21,7 +21,28 @@ let byId = async (transitionId) => {
     });
 };
 
+let effects = [
+    'Fade',
+    'Zoom',
+    'Wipe',
+    'Slide',
+    'Fly',
+    'CrossZoom',
+    'FlyRotate',
+    'Cube',
+    'CubeZoom',
+    'VerticalWipe',
+    'VerticalSlide',
+    'Merge',
+    'WipeReverse',
+    'SlideReverse',
+    'VerticalWipeReverse',
+    'VerticalSlideReverse',
+    'Cut',
+];
+
 module.exports = {
     all: all,
     byId: byId,
+    effects: effects,
 };

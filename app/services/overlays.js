@@ -1,4 +1,4 @@
-const vmixService = require('./vmix');
+const vmixService = require('./vmix').getData;
 const lodashGet = require('lodash/get');
 const inputService = require('./inputs');
 

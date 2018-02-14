@@ -1,6 +1,4 @@
 
-const getVmixData = require('../../services/vmix');
-const lodashGet = require('lodash/get');
 const transitionService = require('../../services/transitions');
 
 module.exports = async (req, res) => {

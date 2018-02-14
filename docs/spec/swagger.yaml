@@ -92,6 +92,48 @@ paths:
               }
         501:
           description: "Unable to connect to vMix"
+    put:
+      tags:
+      - "input"
+      summary: "Update a specific input"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "inputId"
+        in: "path"
+        description: "ID of input to update"
+        required: true
+        type: "integer"
+      - name: "isActive"
+        in: "query"
+        description: "Use `true` to set this input as active; use `false` to put this input in the preview and make the input currently in the preview active."
+        required: false
+        type: "string"
+      - name: "transitionEffect"
+        in: "query"
+        description: "Optional transition effect. Only applies if `isActive` is set and causing the currently active input to change visibility. Use one of the following values: `Fade`, `Zoom`, `Wipe`, `Slide`, `Fly`, `CrossZoom`, `FlyRotate`, `Cube`, `CubeZoom`, `VerticalWipe`, `VerticalSlide`, `Merge`, `WipeReverse`, `SlideReverse`, `VerticalWipeReverse`, `VerticalSlideReverse`, `Cut`."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A specific input was updated successfully"
+          schema:
+            $ref: "#/definitions/Input"
+          examples:
+            application/json:
+              {
+                "inputId": 1,
+                "type": "Xaml",
+                "title": "NewsHD2.xaml",
+                "state": "Paused",
+                "position": 0,
+                "duration": 0,
+                "loop": false,
+                "isActive": false,
+                "isPreview": false
+              }
+        501:
+          description: "Unable to connect to vMix"
   /inputs/active:
     get:
       tags:
