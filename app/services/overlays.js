@@ -12,7 +12,7 @@ let all = async () => {
 
         return {
             overlayId: parseInt(lodashGet(overlay, '_attributes.number', null)),
-            input: input ? input.inputId : null,
+            inputId: input ? input.inputId : null,
         };
     }));
 };
