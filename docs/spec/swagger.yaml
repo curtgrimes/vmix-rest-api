@@ -1,0 +1,117 @@
+swagger: "2.0"
+info:
+  version: "0.1"
+  title: "vMix Unofficial REST API"
+host: localhost:3000
+tags:
+- name: "vmix"
+  description: "High-level information about vMix"
+- name: "input"
+  description: "Operations about inputs"
+schemes:
+- "http"
+paths:
+  /:
+    get:
+      tags:
+      - "vmix"
+      summary: "Get high-level information about vMix"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/vmix"
+        501:
+          description: "vMix is not running"
+  /inputs:
+    get:
+      tags:
+      - "input"
+      summary: "Get a list of all inputs"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Input"
+        501:
+          description: "vMix is not running"
+  /inputs/{inputId}:
+    get:
+      tags:
+      - "input"
+      summary: "Get a specific input"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "inputId"
+        in: "path"
+        description: "ID of input to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Input"
+        501:
+          description: "vMix is not running"
+definitions:
+  vmix:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+      edition:
+        type: "string"
+      inputs:
+        type: "array"
+        items:
+          type: "string"
+      preview:
+        type: "integer"
+      active:
+        type: "integer"
+      fadeToBlack:
+        type: "boolean"
+      recording:
+        type: "boolean"
+      external:
+        type: "boolean"
+      streaming:
+        type: "boolean"
+      playList:
+        type: "boolean"
+      multiCorder:
+        type: "boolean"
+      fullscreen:
+        type: "boolean"
+    xml:
+      name: "vmix"
+  Input:
+    type: "object"
+    properties:
+      key:
+        type: "string"
+      number:
+        type: "string"
+      type:
+        type: "string"
+      title:
+        type: "string"
+      state:
+        type: "string"
+      position:
+        type: "string"
+      duration:
+        type: "string"
+      loop:
+        type: "boolean"
+        default: false
+    xml:
+      name: "Input"
