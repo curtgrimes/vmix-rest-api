@@ -234,7 +234,7 @@ paths:
   /status:
     get:
       tags:
-      - "vmix"
+      - "status"
       summary: "Get high-level state information about the vMix environment"
       produces:
       - "application/json"
