@@ -4,16 +4,16 @@ info:
   title: "vMix Unofficial REST API"
 host: localhost:3000
 tags:
-- name: "vmix"
-  description: "Version information about vMix"
-- name: "status"
-  description: "High-level state information about the vMix environment"
 - name: "input"
   description: "Different sources that can be loaded into vMix"
 - name: "overlay"
   description: "A container for an input that can be displayed on top of other inputs"
 - name: "transition"
   description: "A preset for changing from one input to another"
+- name: "vmix"
+  description: "Version information about vMix"
+- name: "status"
+  description: "High-level state information about the vMix environment"
 schemes:
 - "http"
 paths:
@@ -90,6 +90,64 @@ paths:
                 "isActive": false,
                 "isPreview": false
               }
+        501:
+          description: "Unable to connect to vMix"
+  /inputs/active:
+    get:
+      tags:
+      - "input"
+      summary: "Retrieve the active input"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "The input was retrieved successfully"
+          schema:
+            $ref: "#/definitions/Input"
+          examples:
+            application/json:
+              {
+                "inputId": 2,
+                "type": "Xaml",
+                "title": "NewsHD2.xaml",
+                "state": "Paused",
+                "position": 0,
+                "duration": 0,
+                "loop": false,
+                "isActive": true,
+                "isPreview": false
+              }
+        204:
+          description: "No active input found"
+        501:
+          description: "Unable to connect to vMix"
+  /inputs/preview:
+    get:
+      tags:
+      - "input"
+      summary: "Retrieve the input currently in preview"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "The input was retrieved successfully"
+          schema:
+            $ref: "#/definitions/Input"
+          examples:
+            application/json:
+              {
+                "inputId": 1,
+                "type": "Xaml",
+                "title": "NewsHD2.xaml",
+                "state": "Paused",
+                "position": 0,
+                "duration": 0,
+                "loop": false,
+                "isActive": false,
+                "isPreview": true
+              }
+        204:
+          description: "No preview input found"
         501:
           description: "Unable to connect to vMix"
   /overlays:
@@ -234,7 +292,7 @@ paths:
   /status:
     get:
       tags:
-      - "vmix"
+      - "status"
       summary: "Get high-level state information about the vMix environment"
       produces:
       - "application/json"
