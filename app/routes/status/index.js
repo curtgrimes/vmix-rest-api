@@ -3,8 +3,14 @@ const vmixService = require('../../services/vmix').getData;
 const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
-status.get('/', async (req, res) => {
-    let vmixData = await vmixService();
+status.get('/', async (req, res, next) => {
+    try {
+        let vmixData = await vmixService();
+    }
+    catch (error) {
+        next(error);
+        return;
+    }
 
     res.json({
         fadeToBlack: boolean(lodashGet(vmixData, 'version[0]._text[0]')),

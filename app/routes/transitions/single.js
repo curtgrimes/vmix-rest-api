@@ -2,7 +2,13 @@
 const transitionService = require('../../services/transitions');
 
 module.exports = async (req, res) => {
-    let transitions = await transitionService.all();
+    try {
+        let transitions = await transitionService.all();
+    }
+    catch (error) {
+        next(error);
+        return;
+    }
     
     let single = transitions.find((transition) => {
         return transition.transitionId === parseInt(req.params.transitionId);

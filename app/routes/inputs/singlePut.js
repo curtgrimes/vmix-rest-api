@@ -3,8 +3,15 @@ const inputService = require('../../services/inputs');
 const vmixService = require('../../services/vmix');
 const transitionEffects = require('../../services/transitions').effects;
 
-module.exports = async (req, res) => {
-    const single = await inputService.byId(req.params.inputId);
+module.exports = async (req, res, next) => {
+    try {
+        const single = await inputService.byId(req.params.inputId);
+    }
+    catch (error) {
+        next(error);
+        return;
+    }
+
     let success, transitionEffect;
 
     if (!single) {
@@ -23,7 +30,7 @@ module.exports = async (req, res) => {
     }
 
     const newIsActive = stringToBoolean(req.query.isActive);
-    
+
     if (typeof(newIsActive) === 'boolean' && newIsActive !== single.isActive) {
         // Make active input preview and make preview active
         if (newIsActive === true) {

@@ -4,7 +4,13 @@ const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
 vmix.get('/', async (req, res) => {
-    let vmixData = await vmixService();
+    try {
+        let vmixData = await vmixService();
+    }
+    catch (error) {
+        next(error);
+        return;
+    }
 
     res.json({
         version: lodashGet(vmixData, 'version[0]._text[0]'),
