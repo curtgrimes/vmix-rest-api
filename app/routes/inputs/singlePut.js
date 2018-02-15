@@ -4,8 +4,9 @@ const vmixService = require('../../services/vmix');
 const transitionEffects = require('../../services/transitions').effects;
 
 module.exports = async (req, res, next) => {
+    let single;
     try {
-        const single = await inputService.byId(req.params.inputId);
+        single = await inputService.byId(req.params.inputId);
     }
     catch (error) {
         next(error);
@@ -22,7 +23,6 @@ module.exports = async (req, res, next) => {
     if (req.query.transitionEffect) {
         let transitionEffectIndex = transitionEffects.map((effect) => { return effect.toLowerCase();})
                                         .indexOf(req.query.transitionEffect.toLowerCase());
-                                        console.log(transitionEffectIndex);
         if (transitionEffectIndex >= 0) {
             // Valid transition value also provided
             transitionEffect = transitionEffects[transitionEffectIndex];

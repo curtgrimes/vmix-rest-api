@@ -1,12 +1,9 @@
 const request = require('request-promise');
 const xml2js = require('xml-js').xml2js;
 const lodashGet = require('lodash/get');
+const config = require('../config').load();
 
-if (!process.env.VMIX_PATH) {
-    process.env.VMIX_PATH = 'http://localhost:8080';
-}
-
-const vmixPath = process.env.VMIX_PATH + (!stringEndsWithAPIPath(process.env.VMIX_PATH) ? '/api' : '');
+const vmixPath = config.vmix_rest_api.vmix_path + (!stringEndsWithAPIPath(config.vmix_rest_api.vmix_path) ? '/api' : '');
 
 function stringEndsWithAPIPath(string) {
     let matches = string.match(".*\/api$");

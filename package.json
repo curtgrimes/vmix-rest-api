@@ -1,6 +1,6 @@
 {
   "name": "vmix-rest-api",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "app/index.js",
   "bin": "app/index.js",
@@ -10,10 +10,13 @@
     "lodash": "^4.17.5",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
-    "xml-js": "^1.6.2"
+    "xml-js": "^1.6.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {},
   "scripts": {
+    "package": "scripts/package.sh",
+    "version": "echo $npm_package_version"
   },
   "repository": {
     "type": "git",

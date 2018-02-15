@@ -4,8 +4,9 @@ const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
 vmix.get('/', async (req, res) => {
+    let vmixData;
     try {
-        let vmixData = await vmixService();
+        vmixData = await vmixService();
     }
     catch (error) {
         next(error);

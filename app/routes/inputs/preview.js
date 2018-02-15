@@ -1,8 +1,9 @@
 const inputService = require('../../services/inputs');
 
 module.exports = async (req, res, next) => {
+    let all;
     try {
-        const all = await inputService.all();
+        all = await inputService.all();
     }
     catch (error) {
         next(error);

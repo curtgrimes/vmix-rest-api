@@ -1,8 +1,9 @@
 const overlayService = require('../../services/overlays');
 
 module.exports = async (req, res, next) => {
+    let all;
     try {
-        const all = await overlayService.all();
+        all = await overlayService.all();
     }
     catch (error) {
         next(error);

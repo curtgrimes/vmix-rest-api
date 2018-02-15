@@ -1,8 +1,10 @@
 const transitionService = require('../../services/transitions');
 
 module.exports = async (req, res, next) => {
+    let all;
+    
     try {
-        let all = await transitionService.all();
+        all = await transitionService.all();
     }
     catch (error) {
         next(error);
