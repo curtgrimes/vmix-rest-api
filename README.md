@@ -22,15 +22,14 @@ This is a REST API that developers can use to interact with the <a href="https:/
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
 1. Download the [latest Windows release](https://github.com/curtgrimes/vmix-rest-api/releases/latest)
-1. (TODO) Update the config file with the Web Controller URL
-1. Run the vMix REST API. If all goes well, it'll give you the new base URI to make requests against.
-
+1. Open the config.yml file in a text editor and update it with your Web Controller URL.
+1. Run the vMix REST API and start making requests. 🤖
 
 ## Full API Documentation
 Read the [full API documentation](https://curtgrimes.github.io/vmix-rest-api/) to see what the vMix REST API can do.
 
 ## Examples
-Note that in these examples, *http://localhost:3000* should be the base URI given to you when you start the vMix REST API.
+In these examples, replace *http://localhost:3000* with your own base URL given when you start the vMix REST API.
 
 ### Get a list of all inputs
 **`GET /inputs`**
