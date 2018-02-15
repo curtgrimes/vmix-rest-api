@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  version: "0.1"
-  title: "vMix Unofficial REST API"
+  version: "0.2"
+  title: "vMix REST API"
 host: localhost:3000
 tags:
 - name: "input"
