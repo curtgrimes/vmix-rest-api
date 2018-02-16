@@ -1,4 +1,10 @@
-# vMix REST API
+<h1 align="center">
+  <br>
+  <img src="/docs/screenshot.png?raw=true" alt="vMix REST API" width="500">
+  <br>
+  vMix REST API
+  <br>
+</h1>
 
 This is a REST API that developers can use to interact with the <a href="https://www.vmix.com/" target="_blank">vMix Live Production & Streaming Software</a>. It supplements and runs alongside vMix's <a href="https://www.vmix.com/help17/index.htm?DeveloperAPI.html">built-in XML-based API</a>.
 
