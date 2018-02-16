@@ -1,11 +1,10 @@
-<h1 align="center">
+<h1 align="center">vMix REST API</h1>
+<p align="center">
   <img src="/docs/screenshot.png?raw=true" alt="vMix REST API" width="500">
-  <br>
-  vMix REST API
-  <br>
-</h1>
-
-This REST API lets developers interact with the <a href="https://www.vmix.com/" target="_blank">vMix Live Production & Streaming Software</a>. It runs alongside vMix and its <a href="https://www.vmix.com/help17/index.htm?DeveloperAPI.html">built-in XML API</a>.
+</p>
+<p align="center">
+  A REST API for <a href="https://www.vmix.com/" target="_blank">vMix Live Video Streaming</a>.
+</p>
 
 ## Table of Contents
 * [Features](#features)
@@ -19,16 +18,16 @@ This REST API lets developers interact with the <a href="https://www.vmix.com/" 
 * [Development](#development)
 
 ## Features
-* Awesome, [well-documented API](https://curtgrimes.github.io/vmix-rest-api) that's built with REST principles in mind
+* [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) that's built with REST principles in mind
 * Easy to get inputs, overlays, transitions, and send actions to a running vMix instance
 * Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest) that exposes the REST API on a port on localhost
-* (TODO) Built-in remote access to the REST API with access token authentication
+* Runs alongside vMix's existing XML-based API
 
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
 1. Download the [latest Windows release](https://github.com/curtgrimes/vmix-rest-api/releases/latest)
 1. Open the config.yml file in a text editor and update it with your Web Controller URL.
-1. Run the vMix REST API and start making requests. 🤖
+1. Run the vMix REST API and start making requests. Check out the [examples](#examples) to get started. 🤖
 
 ## Full API Documentation
 Read the [full API documentation](https://curtgrimes.github.io/vmix-rest-api/) to see what the vMix REST API can do.
