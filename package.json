@@ -5,11 +5,24 @@
   "main": "app/index.js",
   "bin": "app/index.js",
   "dependencies": {
+    "ascii-table": "0.0.9",
     "boolean": "^0.1.3",
+    "center-align": "^1.0.1",
+    "chalk": "^2.3.1",
+    "clear": "0.0.1",
     "express": "^4.16.2",
+    "figlet": "^1.2.0",
+    "get-version": "^1.1.3",
+    "hostile": "^1.3.1",
+    "left-pad": "^1.2.0",
     "lodash": "^4.17.5",
+    "openurl": "^1.1.1",
+    "pad": "^2.0.3",
+    "pkginfo": "^0.4.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "table": "^4.0.2",
+    "wordwrap": "^1.0.0",
     "xml-js": "^1.6.2",
     "yamljs": "^0.3.0"
   },
@@ -21,6 +34,13 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/curtgrimes/vmix-rest-api.git"
+  },
+  "pkg": {
+    "scripts": [
+      "/node_modules/figlet/fonts/Standard.flf",
+      "/figlet/fonts/Standard.flf",
+      "package.json"
+    ]
   },
   "author": "",
   "license": "ISC",

@@ -1,13 +1,16 @@
 // Load config first
 const config = require('./config').load();
+require('./splashScreen')();
+
+if (!config) {
+    // Config not loaded. Splash screen will show
+    // an error message.
+    return;
+}
 
 var express = require('express');
 var app = express();
 const routes = require('./routes');
-
-console.log('Unofficial vMix REST API');
-console.log('In vMix, turn on Web Controller and set the port to 8080.');
-console.log('If everything works, visit http://localhost:'+ config.vmix_rest_api.port +' in a browser on this computer.');
 
 app.use(function (req, res, next) {
     if (!config.vmix_rest_api.vmix_path) {

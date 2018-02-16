@@ -4,6 +4,7 @@ const lodashGet = require('lodash/get');
 const config = require('../config').load();
 
 const vmixPath = config.vmix_rest_api.vmix_path + (!stringEndsWithAPIPath(config.vmix_rest_api.vmix_path) ? '/api' : '');
+const vmixLoadTimeout = 4000;
 
 function stringEndsWithAPIPath(string) {
     let matches = string.match(".*\/api$");
@@ -12,7 +13,7 @@ function stringEndsWithAPIPath(string) {
 
 const getData = () => {
     return new Promise((resolve, reject) => {
-        request(vmixPath, function (error, response, xml) {
+        request(vmixPath, {timeout: vmixLoadTimeout}, (error, response, xml) => {
             if (error || !xml) {
                 return;
             }
@@ -52,7 +53,21 @@ const execute = (functionName, inputId, value) => {
     });
 };
 
+let connected = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let vmixData = await getData();
+            resolve(true);
+        }
+        catch (error) {
+            resolve(false);
+        }
+    })
+};
+
 module.exports = {
-    getData: getData,
-    execute: execute,
+    getData,
+    execute,
+    connected,
+    vmixLoadTimeout,
 }

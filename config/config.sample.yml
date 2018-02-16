@@ -4,7 +4,7 @@ vmix_rest_api:
   # If vMix is running on the current host, you should be
   # able to use localhost instead of an IP address.
   # Examples: http://10.211.55.6:8080, http://localhost:8080
-  vmix_path: http://localhost:8080
+  vmix_path: http://localhost:8088
 
   # Port to make the API available on localhost. Don't use
   # the same port as vMix above.
