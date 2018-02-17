@@ -13,10 +13,6 @@
 * **Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest)** that exposes the REST API.
 * Runs alongside vMix's existing XML-based API.
 
-<p align="center">
-  <img src="/docs/vmix-web-api-features.png?raw=true" alt="vMix REST API Features" width="800">
-</p>
-
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
 1. Download the [latest Windows release](https://github.com/curtgrimes/vmix-rest-api/releases/latest)
