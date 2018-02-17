@@ -33,12 +33,12 @@
 Read the [full API documentation](https://curtgrimes.github.io/vmix-rest-api/) to see what the vMix REST API can do.
 
 ## Examples
-In these examples, replace *http://localhost:3000* with your own base URL given when you start the vMix REST API.
+In these examples, replace *http://localhost:3000/api/rest/v1* with your own base URL given when you start the vMix REST API.
 
 ### Get a list of all inputs
 **`GET /inputs`**
 ```
-curl -i -H 'Accept: application/json' http://localhost:3000/inputs
+curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/inputs
 ```
 Returns:
 ```json
@@ -71,7 +71,7 @@ Returns:
 ### Get a single input
 **`GET /inputs/2`**
 ```
-curl -i -H 'Accept: application/json' http://localhost:3000/inputs/2
+curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/inputs/2
 ```
 Returns:
 ```json
@@ -91,14 +91,14 @@ Returns:
 ### Make input 1 active with a wipe transition effect
 **`PUT /inputs/1?isActive=true&transitionEffect=wipe`**
 ```
-curl -i -H 'Accept: application/json' -X PUT http://localhost:3000/inputs/1?isActive=true&transitionEffect=wipe
+curl -i -H 'Accept: application/json' -X PUT http://localhost:3000/api/rest/v1/inputs/1?isActive=true&transitionEffect=wipe
 ```
 Returns 200 on success.
 
 ### Get vMix version information
 **`GET /vmix**
 ```
-curl -i -H 'Accept: application/json' http://localhost:3000/vmix
+curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/vmix
 ```
 Returns:
 ```json
@@ -114,7 +114,7 @@ Returns:
 1. Build: `docker build . -t vmix-rest-api`
 1. Set environment variable `VMIX_PATH` to something like `http://10.211.55.6:8088/api`
 1. Run locally on port 3000: `docker run -it -p 3000:3000 -d vmix-rest-api`
-1. Go to http://localhost:3000
+1. Go to http://localhost:3000/api/rest/v1 and start making requests (like http://localhost:3000/api/rest/v1/inputs)
 
 ### Nodemon
 1. Run `CONFIG_PATH=http://path/to/vmix/api nodemon app/index.js`
