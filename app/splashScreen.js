@@ -2,6 +2,7 @@ const config = require('./config');
 const figlet = require('figlet');
 const pad = require('pad');
 const vmix = require('./services/vmix');
+let remoteAccess = require('./remoteAccess');
 // const font = require('figlet/fonts/Standard.flf');
 // const version = require('./util/packageVersion').version;
 var table = require('table').table;
@@ -22,7 +23,7 @@ __   _|  \\/  (_)_  __ |  _ \\| ____/ ___|_   _|    / \\  |  _ \\_ _|\n\
 
   // console.log(chalk.blueBright(figlet.textSync('vMix REST API')));
   // console.log(center('Version '+version + '\n', 65));
-  console.log(center('Version 0.2.0\n', 63));
+  console.log(center('Version 0.3.0\n', 63));
   console.log(center('Visit '+ chalk.magentaBright('https://curtgrimes.github.io/vmix-rest-api/') + ' for documentation.\n', 75));
 
   let connectedToVmix,
@@ -40,11 +41,17 @@ __   _|  \\/  (_)_  __ |  _ \\| ____/ ___|_   _|    / \\  |  _ \\_ _|\n\
     return;
   }
 
-  console.log(center('Open '+ chalk.greenBright('http://localhost:' + configData.vmix_rest_api.port + '/api/rest/v1') + ' in a browser to begin.\n', 75));
+  let remoteConnectionPath = await remoteAccess.connect();
+  let remoteWebControllerEnabled = configData.vmix_rest_api.remote_access.remote_web_controller;
+
+  console.log(center('Open '+ chalk.greenBright('http://localhost:' + configData.vmix_rest_api.port) + ' in a browser to begin.\n', 75));
 
 console.log(table([
   [chalk.bold('vMix REST API'), 'http://localhost:'+ configData.vmix_rest_api.port],
-  [chalk.bold('vMix Web Controller'), configData.vmix_rest_api.vmix_path],
+  ...(remoteConnectionPath ? [[chalk.bold('Remote Access'), remoteConnectionPath]] : []),
+  ...(remoteConnectionPath && remoteWebControllerEnabled ? [[chalk.bold('Web Controller Remote Access'), remoteConnectionPath + '/web-controller']] : []),
+  
+  [chalk.bold('Local Web Controller'), configData.vmix_rest_api.vmix_path],
   [chalk.bold('Config'), config.getPath()],
 ], {
   columns: {

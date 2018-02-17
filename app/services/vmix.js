@@ -2,6 +2,7 @@ const request = require('request-promise');
 const xml2js = require('xml-js').xml2js;
 const lodashGet = require('lodash/get');
 const config = require('../config').load();
+var proxy = require('express-http-proxy');
 
 const vmixPath = config.vmix_rest_api.vmix_path + (!stringEndsWithAPIPath(config.vmix_rest_api.vmix_path) ? '/api' : '');
 const vmixLoadTimeout = 4000;
@@ -65,9 +66,32 @@ let connected = () => {
     })
 };
 
+let proxyToWebController = proxy(vmixPath.replace('/api',''), {
+    proxyReqPathResolver: function(req) {
+        return req.url.replace('/web-controller','');
+    },
+    userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
+        if (proxyRes.headers['content-type'].includes('image')) {
+            // Don't mess with the incoming image; pass it through as is
+            return proxyResData;
+        }
+        else {
+            // Replace some paths to things
+            return proxyResData.toString('utf8')
+                    .replace(/href="\//g,'href="/web-controller/')
+                    .replace(/src="\//g,'src="/web-controller/')
+                    .replace(/url\('\//g, 'url(\'/web-controller/')
+                    .replace(/\/controllerupdate/g, '/web-controller/controllerupdate')
+                    .replace(/\/api/g, '/web-controller/api')
+                    .replace(/\/tallyupdate/g, '/web-controller/tallyupdate');
+        }
+    }
+});
+
 module.exports = {
     getData,
     execute,
     connected,
     vmixLoadTimeout,
+    proxyToWebController,
 }

@@ -10,3 +10,18 @@ vmix_rest_api:
   # the same port as vMix above.
   # Example: 3000
   port: 3000
+
+
+  # Remote access
+  # Allow remote access to the REST API outside of your 
+  # local network. You'll be given an access URL when
+  # you start the REST API. This URL changes every time 
+  # you start the REST API.
+  remote_access:
+    enabled: false
+    
+    # Make the native vMix Web Controller available remotely.
+    # You'll be given the remote web controller URL when you
+    # start the REST API.
+    remote_web_controller: false
+    
