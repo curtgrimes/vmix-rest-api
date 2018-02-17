@@ -6,21 +6,11 @@
   A REST API for <a href="https://www.vmix.com/" target="_blank">vMix Live Video Streaming</a>.
 </p>
 
-## Table of Contents
-* [Features](#features)
-* [Installation](#installation)
-* [Full API Documentation](#full-api-documentation)
-* [Examples](#examples)
-  * [Get a list of all inputs](#get-a-list-of-all-inputs)
-  * [Get a single input](#get-a-single-input)
-  * [Make input 1 active with a wipe transition effect](#make-input-1-active-with-a-wipe-transition-effect)
-  * [Get vMix version information](#get-vmix-version-information)
-* [Development](#development)
-
 ## Features
-* [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) that's built with REST principles in mind
-* Easy to get inputs, overlays, transitions, and send actions to a running vMix instance
-* Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest) that exposes the REST API on a port on localhost
+* [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) for vMix that's built with REST principles in mind
+* **Remote access** to the REST API and vMix's native Web Controller
+* Easily **get inputs, overlays, transitions, and send actions** to a running vMix instance
+* **Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest)** that exposes the REST API
 * Runs alongside vMix's existing XML-based API
 
 ## Installation
