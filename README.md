@@ -7,11 +7,15 @@
 </p>
 
 ## Features
-* [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) for vMix that's built with REST principles in mind
-* **Remote access** to the REST API and vMix's native Web Controller
-* Easily **get inputs, overlays, transitions, and send actions** to a running vMix instance
-* **Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest)** that exposes the REST API
-* Runs alongside vMix's existing XML-based API
+* [Well-documented API](https://curtgrimes.github.io/vmix-rest-api) for vMix that's built with REST principles in mind.
+* **Remote access** to the REST API and vMix's native Web Controller.
+* Easily **get inputs, overlays, transitions, and send actions** to a running vMix instance.
+* **Standalone [Windows executable](https://github.com/curtgrimes/vmix-rest-api/releases/latest)** that exposes the REST API.
+* Runs alongside vMix's existing XML-based API.
+
+<p align="center">
+  <img src="/docs/vmix-web-api-features.png?raw=true" alt="vMix REST API Features" width="700">
+</p>
 
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
