@@ -14,7 +14,7 @@
 * Runs alongside vMix's existing XML-based API.
 
 <p align="center">
-  <img src="/docs/vmix-web-api-features.png?raw=true" alt="vMix REST API Features" width="700">
+  <img src="/docs/vmix-web-api-features.png?raw=true" alt="vMix REST API Features" width="800">
 </p>
 
 ## Installation
