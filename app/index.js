@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
     }
 });
 
-app.use('/', routes);
+app.use('/api/rest/v1', routes);
 
 // Error handling
 // Put this last

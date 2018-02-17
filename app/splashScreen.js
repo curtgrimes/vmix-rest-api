@@ -40,7 +40,7 @@ __   _|  \\/  (_)_  __ |  _ \\| ____/ ___|_   _|    / \\  |  _ \\_ _|\n\
     return;
   }
 
-  console.log(center('Open '+ chalk.greenBright('http://localhost:'+ configData.vmix_rest_api.port) + ' in a browser to get started.\n', 75));
+  console.log(center('Open '+ chalk.greenBright('http://localhost:' + configData.vmix_rest_api.port + '/api/rest/v1') + ' in a browser to begin.\n', 75));
 
 console.log(table([
   [chalk.bold('vMix REST API'), 'http://localhost:'+ configData.vmix_rest_api.port],

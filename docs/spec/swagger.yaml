@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "0.2"
   title: "vMix REST API"
-host: localhost:3000
+host: http://localhost:3000/api/rest/v1
 tags:
 - name: "input"
   description: "Different sources that can be loaded into vMix"
