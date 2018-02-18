@@ -1,6 +1,6 @@
 <h1 align="center">vMix REST API</h1>
 <p align="center">
-  <img src="/docs/screenshot.png?raw=true" alt="vMix REST API" width="500">
+  <img src="/docs/screenshot.png?raw=true" alt="vMix REST API" width="650">
 </p>
 <p align="center">
   A REST API for <a href="https://www.vmix.com/" target="_blank">vMix Live Video Streaming</a>.
