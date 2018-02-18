@@ -16,7 +16,7 @@
 ## Installation
 1. Run [vMix](https://www.vmix.com) and [enable the Web Controller](https://www.vmix.com/knowledgebase/article.aspx/69/how-to-control-vmix-from-a-web-browser-using-vmix-web-controller).
 1. Download the [latest Windows release](https://github.com/curtgrimes/vmix-rest-api/releases/latest)
-1. Open the config.yml file in a text editor and update it with your Web Controller URL.
+1. Open the included [config.yml](config/config.sample.yml) file in a text editor included in the download in a text editor and update it with your Web Controller URL.
 1. Run the vMix REST API and start making requests. Check out the [examples](#examples) to get started. 🤖
 
 ## Full API Documentation

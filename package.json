@@ -10,6 +10,7 @@
     "center-align": "^1.0.1",
     "chalk": "^2.3.1",
     "clear": "0.0.1",
+    "cross-spawn": "^6.0.4",
     "express": "^4.16.2",
     "express-http-proxy": "^1.1.0",
     "figlet": "^1.2.0",
@@ -18,6 +19,7 @@
     "left-pad": "^1.2.0",
     "lodash": "^4.17.5",
     "ngrok": "^2.2.26",
+    "npm-execspawn": "^1.3.0",
     "openurl": "^1.1.1",
     "pad": "^2.0.3",
     "pkginfo": "^0.4.1",
@@ -31,6 +33,7 @@
   "devDependencies": {},
   "scripts": {
     "package": "scripts/package.sh",
+    "package-nozip": "scripts/package-nozip.sh",
     "version": "echo $npm_package_version"
   },
   "repository": {
@@ -38,11 +41,6 @@
     "url": "git+ssh://git@gitlab.com/curtgrimes/vmix-rest-api.git"
   },
   "pkg": {
-    "scripts": [
-      "/node_modules/figlet/fonts/Standard.flf",
-      "/figlet/fonts/Standard.flf",
-      "package.json"
-    ]
   },
   "author": "",
   "license": "ISC",

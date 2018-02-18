@@ -3,3 +3,4 @@
 npm-debug.log
 vmix-rest-api*.zip
 /config/config.yml
+.tmp

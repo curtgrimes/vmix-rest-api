@@ -11,12 +11,10 @@ if (!config) {
 var express = require('express');
 var app = express();
 const routes = require('./routes');
-const router = require('express').Router();
-let remoteAccess = require('./remoteAccess');
 let vmix = require('./services/vmix');
 
 if (config.vmix_rest_api.remote_access.enabled) {
-    remoteAccess.connect();
+    require('./remoteAccess').connect();
 }
 
 app.use(function (req, res, next) {
@@ -37,7 +35,7 @@ app.get('/', async (req, res) => {
 
 if (config.vmix_rest_api.remote_access.remote_web_controller) {
     // Enable proxy to Web Controller
-    app.get(['/web-controller', '/web-controller*'], vmix.proxyToWebController);
+    app.get(['/web-controller', '/web-controller*'], vmix.getProxyToWebController());
 }
 
 app.use('/api/rest/v1', routes);
