@@ -40,20 +40,19 @@ let all = async () => {
                 position: parseFloat(lodashGet(input, '_attributes.position', null)),
                 duration: parseFloat(lodashGet(input, '_attributes.duration', null)),
                 loop: boolean(lodashGet(input, '_attributes.loop', null)),
-                ...(lodashGet(input, '_attributes.muted', null) ? {muted: boolean(lodashGet(input, '_attributes.muted', null))} : null),
-                ...(lodashGet(input, '_attributes.volume', null) ? {volume: parseInt(lodashGet(input, '_attributes.volume', null))} : null),
-                ...(lodashGet(input, '_attributes.balance', null) ? {balance: parseInt(lodashGet(input, '_attributes.balance', null))} : null),
-                ...(lodashGet(input, '_attributes.solo', null) ? {solo: boolean(lodashGet(input, '_attributes.solo', null))} : null),
-                ...(lodashGet(input, '_attributes.audiobusses', null) ? {audiobusses: lodashGet(input, '_attributes.audiobusses', null)} : null),
-                ...((meterL || meterR) ? {
-                    audioMeter: {
-                        left: parseFloat(meterL),
-                        right: parseFloat(meterR),
-                    }} : null),
+                muted: (lodashGet(input, '_attributes.muted', null) ? boolean(lodashGet(input, '_attributes.muted', null)) : null),
+                volume: (lodashGet(input, '_attributes.volume', null) ? parseInt(lodashGet(input, '_attributes.volume', null)) : null),
+                balance: (lodashGet(input, '_attributes.balance', null) ? parseInt(lodashGet(input, '_attributes.balance', null)) : null),
+                solo: (lodashGet(input, '_attributes.solo', null) ? boolean(lodashGet(input, '_attributes.solo', null)) : null),
+                audiobusses: (lodashGet(input, '_attributes.audiobusses', null) ? lodashGet(input, '_attributes.audiobusses', null) : null),
+                audioMeter: {
+                    left: parseFloat(meterL),
+                    right: parseFloat(meterR),
+                },
             },
 
             // List
-            ...(list.length ? {list} : null),
+            list: (list.length ? list : null),
 
             // Put last
             fields: fieldService.getFields(input),
