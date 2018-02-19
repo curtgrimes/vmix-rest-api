@@ -22,7 +22,7 @@ __   _|  \\/  (_)_  __ |  _ \\| ____/ ___|_   _|    / \\  |  _ \\_ _|\n\
 
   // console.log(chalk.blueBright(figlet.textSync('vMix REST API')));
   // console.log(center('Version '+version + '\n', 65));
-  console.log(center('Version 0.3.0\n', 63));
+  console.log(center('Version 0.4.0\n', 63));
   console.log(center('Visit '+ chalk.magentaBright('https://curtgrimes.github.io/vmix-rest-api/') + ' for documentation.\n', 75));
 
   let connectedToVmix,

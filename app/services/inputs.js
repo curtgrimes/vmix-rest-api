@@ -1,4 +1,5 @@
 const vmixService = require('./vmix');
+const fieldService = require('./fields');
 const lodashGet = require('lodash/get');
 const boolean = require('boolean');
 
@@ -9,22 +10,56 @@ let all = async () => {
     const activeInputId = parseInt(lodashGet(vmixData, 'active[0]._text[0]'));
     const previewInputId = parseInt(lodashGet(vmixData, 'preview[0]._text[0]'));
 
-    // Make 'loop' value a boolean if it's present
     return inputs.map((input) => {
         const inputId = parseInt(lodashGet(input, '_attributes.number', null));
-        
+
+        // List
+        let list = lodashGet(input, 'list[0].item', []).map((listItem) => {
+            return {
+                path: lodashGet(listItem, '_text[0]', null),
+                selected: boolean(lodashGet(listItem, '_attributes.selected', null)),
+            };
+        });
+
+        let meterL = lodashGet(input, '_attributes.meterF1', null);
+        let meterR = lodashGet(input, '_attributes.meterF2', null);
+
         return {
             inputId: inputId,
             type: lodashGet(input, '_attributes.type', null),
             title: lodashGet(input, '_attributes.title', null),
-            state: lodashGet(input, '_attributes.state', null),
-            position: parseInt(lodashGet(input, '_attributes.position', null)),
-            duration: parseInt(lodashGet(input, '_attributes.duration', null)),
-            loop: boolean(lodashGet(input, '_attributes.loop', null)),
+            state: {
+                running: lodashGet(input, '_attributes.state', null) === 'Running',
+                paused: lodashGet(input, '_attributes.state', null) === 'Paused',
+                completed: lodashGet(input, '_attributes.state', null) === 'Completed',
+            },
             isActive: activeInputId === inputId,
             isPreview: previewInputId === inputId,
+
+            media: {
+                position: parseFloat(lodashGet(input, '_attributes.position', null)),
+                duration: parseFloat(lodashGet(input, '_attributes.duration', null)),
+                loop: boolean(lodashGet(input, '_attributes.loop', null)),
+                ...(lodashGet(input, '_attributes.muted', null) ? {muted: boolean(lodashGet(input, '_attributes.muted', null))} : null),
+                ...(lodashGet(input, '_attributes.volume', null) ? {volume: parseInt(lodashGet(input, '_attributes.volume', null))} : null),
+                ...(lodashGet(input, '_attributes.balance', null) ? {balance: parseInt(lodashGet(input, '_attributes.balance', null))} : null),
+                ...(lodashGet(input, '_attributes.solo', null) ? {solo: boolean(lodashGet(input, '_attributes.solo', null))} : null),
+                ...(lodashGet(input, '_attributes.audiobusses', null) ? {audiobusses: lodashGet(input, '_attributes.audiobusses', null)} : null),
+                ...((meterL || meterR) ? {
+                    audioMeter: {
+                        left: parseFloat(meterL),
+                        right: parseFloat(meterR),
+                    }} : null),
+            },
+
+            // List
+            ...(list.length ? {list} : null),
+
+            // Put last
+            fields: fieldService.getFields(input),
         };
 
+        // Make 'loop' value a boolean if it's present
         if (lodashGet(input, '_attributes.loop')) {
             input._attributes.loop = (input._attributes.loop.toLowerCase() === 'true');
         }
