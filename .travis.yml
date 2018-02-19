@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "node"
+install:
+  - npm --prefix ./docs install
+deploy:
+  - skip_cleanup: true
+    provider: script
+    script: npm --prefix ./docs run deploy
+    on:
+      branch: master
+  - skip_cleanup: true
+    provider: script
+    script: npm --prefix ./docs run deploy-branch
+    on:
+      all_branches: true
+      condition: '"$TRAVIS_BRANCH" != "master" && "$TRAVIS_BRANCH" != "gh-pages"'

@@ -1,0 +1,968 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.4",
+    "title": "vMix REST API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/rest/v1",
+  "tags": [
+    {
+      "name": "input",
+      "description": "Different sources that can be loaded into vMix"
+    },
+    {
+      "name": "fields",
+      "description": "Titles and images on an input"
+    },
+    {
+      "name": "overlay",
+      "description": "A container for an input that can be displayed on top of other inputs"
+    },
+    {
+      "name": "transition",
+      "description": "A preset for changing from one input to another"
+    },
+    {
+      "name": "vmix",
+      "description": "Version information about vMix"
+    },
+    {
+      "name": "status",
+      "description": "High-level state information about the vMix environment"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/inputs": {
+      "get": {
+        "tags": [
+          "input"
+        ],
+        "summary": "Retrieve a list of inputs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of inputs was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Input"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "inputId": 1,
+                  "type": "ImageSequence",
+                  "title": "MVC-001F.JPG",
+                  "state": {
+                    "running": false,
+                    "paused": false,
+                    "completed": true
+                  },
+                  "isActive": false,
+                  "isPreview": true,
+                  "media": {
+                    "position": 0,
+                    "duration": 0,
+                    "loop": false,
+                    "muted": null,
+                    "volume": null,
+                    "balance": null,
+                    "solo": null,
+                    "audiobusses": null,
+                    "audioMeter": {
+                      "left": null,
+                      "right": null
+                    }
+                  },
+                  "list": null,
+                  "fields": []
+                },
+                {
+                  "inputId": 2,
+                  "type": "VirtualSet",
+                  "title": "CircularStudio",
+                  "state": {
+                    "running": false,
+                    "paused": true,
+                    "completed": false
+                  },
+                  "isActive": false,
+                  "isPreview": false,
+                  "media": {
+                    "position": 0,
+                    "duration": 0,
+                    "loop": false,
+                    "muted": null,
+                    "volume": null,
+                    "balance": null,
+                    "solo": null,
+                    "audiobusses": null,
+                    "audioMeter": {
+                      "left": null,
+                      "right": null
+                    }
+                  },
+                  "list": null,
+                  "fields": []
+                }
+              ]
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/inputs/{inputId}": {
+      "get": {
+        "tags": [
+          "input"
+        ],
+        "summary": "Retrieve a specific input",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "inputId",
+            "in": "path",
+            "description": "ID of input to return",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific input was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            },
+            "examples": {
+              "application/json": {
+                "inputId": 4,
+                "type": "Xaml",
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": true,
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
+              }
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "input"
+        ],
+        "summary": "Update a specific input",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "inputId",
+            "in": "path",
+            "description": "ID of input to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "The updates to make to this input.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isActive": {
+                  "type": "boolean",
+                  "description": "Use `true` to set this input as active; use `false` to put this input in the preview and make the input currently in the preview active."
+                },
+                "transitionEffect": {
+                  "type": "string",
+                  "description": "Optional transition effect. Only applies if `isActive` is set and causing the currently active input to change visibility. Use one of the following values: `Fade`, `Zoom`, `Wipe`, `Slide`, `Fly`, `CrossZoom`, `FlyRotate`, `Cube`, `CubeZoom`, `VerticalWipe`, `VerticalSlide`, `Merge`, `WipeReverse`, `SlideReverse`, `VerticalWipeReverse`, `VerticalSlideReverse`, `Cut`."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific input was updated successfully",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            },
+            "examples": {
+              "application/json": {
+                "inputId": 4,
+                "type": "Xaml",
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": true,
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
+              }
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/inputs/active": {
+      "get": {
+        "tags": [
+          "input"
+        ],
+        "summary": "Retrieve the active input",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The input was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            },
+            "examples": {
+              "application/json": {
+                "inputId": 4,
+                "type": "Xaml",
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": true,
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
+              }
+            }
+          },
+          "204": {
+            "description": "No active input found"
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/inputs/preview": {
+      "get": {
+        "tags": [
+          "input"
+        ],
+        "summary": "Retrieve the input currently in preview",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The input was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            },
+            "examples": {
+              "application/json": {
+                "inputId": 4,
+                "type": "Xaml",
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": false,
+                "isPreview": true,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
+              }
+            }
+          },
+          "204": {
+            "description": "No preview input found"
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/input/{inputId}/fields": {
+      "get": {
+        "tags": [
+          "fields"
+        ],
+        "summary": "Get a list of titles and images that belong to an input",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "inputId",
+            "in": "path",
+            "description": "ID of input to get",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of fields was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Field"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "fieldId": "Headline",
+                  "type": "text",
+                  "text": "News Brief"
+                },
+                {
+                  "fieldId": "Description",
+                  "type": "text",
+                  "text": "January 1, 2020"
+                }
+              ]
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/input/{inputId}/fields/{fieldId}": {
+      "get": {
+        "tags": [
+          "fields"
+        ],
+        "summary": "Get a specific title or image that belongs to an input",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "inputId",
+            "in": "path",
+            "description": "ID of input",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "fieldId",
+            "in": "path",
+            "description": "ID of field",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific field was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Field"
+            },
+            "examples": {
+              "application/json": {
+                "fieldId": "Headline",
+                "type": "text",
+                "text": "News Brief"
+              }
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "fields"
+        ],
+        "summary": "Update a specific title or image that belongs to an input",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "inputId",
+            "in": "path",
+            "description": "ID of input",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "fieldId",
+            "in": "path",
+            "description": "ID of field",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "field",
+            "in": "body",
+            "description": "The updates to make to this field. `text` only applies if `type=\"text\"`. `path` only applies if `type=\"image\"`. Include either `text` or `path`, but not both.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "Only valid if type = \"text\""
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Only valid if type = \"image\""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific field was updated successfully"
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/overlays": {
+      "get": {
+        "tags": [
+          "overlay"
+        ],
+        "summary": "Retrieve a list of overlays",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of overlays was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Overlay"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "overlayId": 1,
+                  "inputId": null
+                },
+                {
+                  "overlayId": 2,
+                  "inputId": 1
+                },
+                {
+                  "overlayId": 3,
+                  "inputId": null
+                },
+                {
+                  "overlayId": 4,
+                  "inputId": null
+                }
+              ]
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/overlays/{overlayId}": {
+      "get": {
+        "tags": [
+          "overlay"
+        ],
+        "summary": "Retrieve a specific overlay",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "overlayId",
+            "in": "path",
+            "description": "ID of overlay to return",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific overlay was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Overlay"
+            },
+            "examples": {
+              "application/json": {
+                "overlayId": 2,
+                "inputId": 1
+              }
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/transitions": {
+      "get": {
+        "tags": [
+          "transition"
+        ],
+        "summary": "Retrieve a list of transitions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of transitions was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Transition"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "transitionId": 1,
+                  "effect": "Fade",
+                  "duration": 500
+                },
+                {
+                  "transitionId": 2,
+                  "effect": "Merge",
+                  "duration": 1000
+                }
+              ]
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/transitions/{transitionId}": {
+      "get": {
+        "tags": [
+          "transition"
+        ],
+        "summary": "Retrieve a specific transition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "transitionId",
+            "in": "path",
+            "description": "ID of transition to return",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific transition was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Transition"
+            },
+            "examples": {
+              "application/json": {
+                "transitionId": 1,
+                "effect": "Fade",
+                "duration": 500
+              }
+            }
+          },
+          "501": {
+            "description": "Unable to connect to vMix"
+          }
+        }
+      }
+    },
+    "/vmix": {
+      "get": {
+        "tags": [
+          "vmix"
+        ],
+        "summary": "Get vMix version information",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Version information was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/vmix"
+            },
+            "examples": {
+              "application/json": {
+                "version": "19.0.0.54",
+                "edition": "Basic HD"
+              }
+            }
+          },
+          "501": {
+            "description": "vMix is not running"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "status"
+        ],
+        "summary": "Get high-level state information about the vMix environment",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "State information was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/status"
+            },
+            "examples": {
+              "application/json": {
+                "fadeToBlack": false,
+                "recording": false,
+                "external": false,
+                "streaming": false,
+                "playlistActive": false,
+                "multiCorder": false,
+                "fullscreen": false
+              }
+            }
+          },
+          "501": {
+            "description": "vMix is not running"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "vmix": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "edition": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "fadeToBlack": {
+          "type": "boolean"
+        },
+        "recording": {
+          "type": "boolean"
+        },
+        "external": {
+          "type": "boolean"
+        },
+        "streaming": {
+          "type": "boolean"
+        },
+        "playlistActive": {
+          "type": "boolean"
+        },
+        "multiCorder": {
+          "type": "boolean"
+        },
+        "fullscreen": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Input": {
+      "type": "object",
+      "properties": {
+        "inputId": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "state": {
+          "type": "object",
+          "properties": {
+            "running": {
+              "type": "boolean"
+            },
+            "paused": {
+              "type": "boolean"
+            },
+            "completed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": false
+        },
+        "isPreview": {
+          "type": "boolean",
+          "default": false
+        },
+        "media": {
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "integer"
+            },
+            "duration": {
+              "type": "integer"
+            },
+            "loop": {
+              "type": "boolean",
+              "default": false
+            },
+            "muted": {
+              "type": "boolean"
+            },
+            "volume": {
+              "type": "integer"
+            },
+            "balance": {
+              "type": "integer"
+            },
+            "solo": {
+              "type": "boolean"
+            },
+            "audiobusses": {
+              "type": "string"
+            },
+            "audiometer": {
+              "type": "object",
+              "properties": {
+                "left": {
+                  "type": "integer"
+                },
+                "right": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "list": {
+          "type": "array",
+          "description": "If `type=\"VideoList\"`, this contains the items in that VideoList.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "selected": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          }
+        }
+      }
+    },
+    "Field": {
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "description": "Only present if type = \"text\""
+        },
+        "path": {
+          "type": "string",
+          "description": "Only present if type = \"image\""
+        }
+      }
+    },
+    "Overlay": {
+      "type": "object",
+      "properties": {
+        "overlayId": {
+          "type": "integer"
+        },
+        "inputId": {
+          "type": "integer"
+        }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "properties": {
+        "transitionId": {
+          "type": "integer"
+        },
+        "effect": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "Input"
+      }
+    }
+  }
+}

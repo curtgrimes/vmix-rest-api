@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "swagger.yaml",
+    "name": "vMix REST",
+    "repo": "curtgrimes/vmix-rest-api",
+    "splitSpec": false,
+    "samples": true,
+    "installSwaggerUI": true
+  }
+}
