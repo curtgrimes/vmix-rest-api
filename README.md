@@ -35,58 +35,143 @@ Returns:
 [
   {
     "inputId": 1,
-    "type": "Xaml",
-    "title": "NewsHD2.xaml",
-    "state": "Paused",
-    "position": 0,
-    "duration": 0,
-    "loop": false,
+    "type": "ImageSequence",
+    "title": "MVC-001F.JPG",
+    "state": {
+      "running": false,
+      "paused": false,
+      "completed": true
+    },
     "isActive": false,
-    "isPreview": false
+    "isPreview": true,
+    "media": {
+      "position": 0,
+      "duration": 0,
+      "loop": false,
+      "muted": null,
+      "volume": null,
+      "balance": null,
+      "solo": null,
+      "audiobusses": null,
+      "audioMeter": {
+        "left": null,
+        "right": null
+      }
+    },
+    "list": null,
+    "fields": []
   },
   {
     "inputId": 2,
-    "type": "Xaml",
-    "title": "TimerClock.xaml",
-    "state": "Paused",
-    "position": 0,
-    "duration": 0,
-    "loop": false,
+    "type": "VirtualSet",
+    "title": "CircularStudio",
+    "state": {
+      "running": false,
+      "paused": true,
+      "completed": false
+    },
     "isActive": false,
-    "isPreview": true
+    "isPreview": false,
+    "media": {
+      "position": 0,
+      "duration": 0,
+      "loop": false,
+      "muted": null,
+      "volume": null,
+      "balance": null,
+      "solo": null,
+      "audiobusses": null,
+      "audioMeter": {
+        "left": null,
+        "right": null
+      }
+    },
+    "list": null,
+    "fields": []
   }
 ]
 ```
 
 ### Get a single input
-**`GET /inputs/2`**
+**`GET /inputs/4`**
 ```
-curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/inputs/2
+curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/inputs/4
 ```
 Returns:
 ```json
 {
-  "inputId": 2,
+  "inputId": 4,
   "type": "Xaml",
-  "title": "TimerClock.xaml",
-  "state": "Paused",
-  "position": 0,
-  "duration": 0,
-  "loop": false,
-  "isActive": false,
-  "isPreview": true
+  "title": "NewsHD.xaml",
+  "state": {
+    "running": false,
+    "paused": true,
+    "completed": false
+  },
+  "isActive": true,
+  "isPreview": false,
+  "media": {
+    "position": 0,
+    "duration": 0,
+    "loop": false,
+    "muted": null,
+    "volume": null,
+    "balance": null,
+    "solo": null,
+    "audiobusses": null,
+    "audioMeter": {
+      "left": null,
+      "right": null
+    }
+  },
+  "list": null,
+  "fields": [
+    {
+      "fieldId": "Headline",
+      "type": "text",
+      "text": "News Brief"
+    },
+    {
+      "fieldId": "Description",
+      "type": "text",
+      "text": "January 1, 2020"
+    }
+  ]
 }
 ```
 
 ### Make input 1 active with a wipe transition effect
-**`PUT /inputs/1?isActive=true&transitionEffect=wipe`**
+**`PUT /inputs/1`**
+
+Request body
+
+```json
+{
+  "isActive": true,
+  "transitionEffect": "wipe"
+}
 ```
-curl -i -H 'Accept: application/json' -X PUT http://localhost:3000/api/rest/v1/inputs/1?isActive=true&transitionEffect=wipe
+```
+curl -i -H 'Accept: application/json' -X PUT -d '{"isActive": true,"transitionEffect": "wipe"}' http://localhost:3000/api/rest/v1/inputs/1
+```
+Returns 200 on success.
+
+### Update the title called "Headline" on input 4
+**`PUT /inputs/4/fields/Headline`**
+
+Request body
+```json
+{
+  "text": "Breaking News"
+}
+```
+```
+curl -i -H 'Accept: application/json' -X PUT -d '{"text": "Breaking News"}' http://localhost:3000/api/rest/v1/inputs/4/fields/Headline
 ```
 Returns 200 on success.
 
 ### Get vMix version information
-**`GET /vmix**
+**`GET /vmix`**
 ```
 curl -i -H 'Accept: application/json' http://localhost:3000/api/rest/v1/vmix
 ```
@@ -102,9 +187,9 @@ Returns:
 ## Development
 ### Docker
 1. Build: `docker build . -t vmix-rest-api`
-1. Set environment variable `VMIX_PATH` to something like `http://10.211.55.6:8088/api`
+1. Set environment variable `CONFIG_PATH` to something like `/path/to/config`
 1. Run locally on port 3000: `docker run -it -p 3000:3000 -d vmix-rest-api`
 1. Go to http://localhost:3000/api/rest/v1 and start making requests (like http://localhost:3000/api/rest/v1/inputs)
 
 ### Nodemon
-1. Run `CONFIG_PATH=http://path/to/vmix/api nodemon app/index.js`
+1. Run `CONFIG_PATH=/path/to/config.yml nodemon app/index.js`
