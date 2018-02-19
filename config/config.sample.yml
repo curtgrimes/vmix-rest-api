@@ -11,6 +11,8 @@ vmix_rest_api:
   # Example: 3000
   port: 3000
 
+  # Log requests to the console
+  logging: false
 
   # Remote access
   # Allow remote access to the REST API outside of your 

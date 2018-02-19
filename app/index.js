@@ -13,6 +13,7 @@ var app = express();
 const routes = require('./routes');
 let vmix = require('./services/vmix');
 var bodyParser = require('body-parser')
+const logger = require('./util/logger');
 
 if (config.vmix_rest_api.remote_access.enabled) {
     require('./remoteAccess').connect();
@@ -29,6 +30,11 @@ app.use(function (req, res, next) {
         next();
     }
 });
+
+if (config.vmix_rest_api.logging) {
+    // Log requests to console
+    app.use(logger);
+}
 
 app.get('/', async (req, res) => {
     let mainPageContent = await require('./mainPage')();
