@@ -1,11 +1,14 @@
 swagger: "2.0"
 info:
-  version: "0.2"
+  version: "0.4"
   title: "vMix REST API"
-host: http://localhost:3000/api/rest/v1
+host: "localhost:3000"
+basePath: "/api/rest/v1"
 tags:
 - name: "input"
   description: "Different sources that can be loaded into vMix"
+- name: "fields"
+  description: "Titles and images on an input"
 - name: "overlay"
   description: "A container for an input that can be displayed on top of other inputs"
 - name: "transition"
@@ -104,16 +107,18 @@ paths:
         description: "ID of input to update"
         required: true
         type: "integer"
-      - name: "isActive"
-        in: "query"
-        description: "Use `true` to set this input as active; use `false` to put this input in the preview and make the input currently in the preview active."
-        required: false
-        type: "string"
-      - name: "transitionEffect"
-        in: "query"
-        description: "Optional transition effect. Only applies if `isActive` is set and causing the currently active input to change visibility. Use one of the following values: `Fade`, `Zoom`, `Wipe`, `Slide`, `Fly`, `CrossZoom`, `FlyRotate`, `Cube`, `CubeZoom`, `VerticalWipe`, `VerticalSlide`, `Merge`, `WipeReverse`, `SlideReverse`, `VerticalWipeReverse`, `VerticalSlideReverse`, `Cut`."
-        required: false
-        type: "string"
+      - name: "input"
+        in: "body"
+        description: "The updates to make to this input."
+        schema:
+          type: object
+          properties:
+            isActive:
+              type: boolean
+              description: "Use `true` to set this input as active; use `false` to put this input in the preview and make the input currently in the preview active."
+            transitionEffect:
+              type: string
+              description: "Optional transition effect. Only applies if `isActive` is set and causing the currently active input to change visibility. Use one of the following values: `Fade`, `Zoom`, `Wipe`, `Slide`, `Fly`, `CrossZoom`, `FlyRotate`, `Cube`, `CubeZoom`, `VerticalWipe`, `VerticalSlide`, `Merge`, `WipeReverse`, `SlideReverse`, `VerticalWipeReverse`, `VerticalSlideReverse`, `Cut`."
       responses:
         200:
           description: "A specific input was updated successfully"
@@ -190,6 +195,110 @@ paths:
               }
         204:
           description: "No preview input found"
+        501:
+          description: "Unable to connect to vMix"
+  /input/{inputId}/fields:
+    get:
+      tags:
+      - "fields"
+      summary: "Get a list of titles and images that belong to an input"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "inputId"
+        in: "path"
+        description: "ID of input to get"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "A list of fields was retrieved successfully"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Field"
+          examples:
+            application/json:
+              [
+                {
+                  "fieldId": "Headline",
+                  "type": "text",
+                  "text": "Breaking News"
+                },
+                {
+                  "fieldId": "Description",
+                  "type": "text",
+                  "text": "Some text about the breaking news here"
+                }
+              ]
+        501:
+          description: "Unable to connect to vMix"
+  /input/{inputId}/fields/{fieldId}:
+    get:
+      tags:
+      - "fields"
+      summary: "Get a specific title or image that belongs to an input"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "inputId"
+        in: "path"
+        description: "ID of input"
+        required: true
+        type: "integer"
+      - name: "fieldId"
+        in: "path"
+        description: "ID of field"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "A specific field was retrieved successfully"
+          schema:
+            $ref: "#/definitions/Field"
+          examples:
+            application/json:
+              {
+                "fieldId": "Headline",
+                "type": "text",
+                "text": "Breaking News"
+              }
+        501:
+          description: "Unable to connect to vMix"
+    put:
+      tags:
+      - "fields"
+      summary: "Update a specific title or image that belongs to an input"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "inputId"
+        in: "path"
+        description: "ID of input"
+        required: true
+        type: "integer"
+      - name: "fieldId"
+        in: "path"
+        description: "ID of field"
+        required: true
+        type: "integer"
+      - name: "field"
+        in: "body"
+        description: "The updates to make to this field. `text` only applies if `type=\"text\"`. `path` only applies if `type=\"image\"`. Include either `text` or `path`, but not both."
+        schema:
+          type: object
+          properties:
+            text:
+              type: string
+              description: "Only valid if type = \"text\""
+            path:
+              type: string
+              description: "Only valid if type = \"image\""
+      responses:
+        200:
+          description: "A specific field was updated successfully"
         501:
           description: "Unable to connect to vMix"
   /overlays:
@@ -391,20 +500,74 @@ definitions:
       title:
         type: "string"
       state:
-        type: "string"
-      position:
-        type: "integer"
-      duration:
-        type: "integer"
-      loop:
-        type: "boolean"
-        default: false
+        type: "object"
+        properties:
+          running:
+            type: "boolean"
+          paused:
+            type: "boolean"
+          completed:
+            type: "boolean"
       isActive:
         type: "boolean"
         default: false
       isPreview:
         type: "boolean"
         default: false
+      media:
+        type: "object"
+        properties:
+          position:
+            type: "integer"
+          duration:
+            type: "integer"
+          loop:
+            type: "boolean"
+            default: false
+          muted:
+            type: "boolean"
+          volume:
+            type: "integer"
+          balance:
+            type: "integer"
+          solo:
+            type: "boolean"
+          audiobusses:
+            type: "string"
+          audiometer:
+            type: "object"
+            properties:
+              left:
+                type: "integer"
+              right:
+                type: "integer"
+      list:
+        type: "array"
+        description: "If `type=\"VideoList\"`, this contains the items in that VideoList."
+        items:
+          type: "object"
+          properties:
+            path:
+              type: "string"
+            selected:
+              type: "boolean"
+      fields:
+        type: "array"
+        items:
+          $ref: "#/definitions/Field"
+  Field:
+    type: "object"
+    properties:
+      fieldId:
+        type: "string"
+      type:
+        type: "string"
+      text:
+        type: "string"
+        description: "Only present if type = \"text\""
+      path:
+        type: "string"
+        description: "Only present if type = \"image\""
   Overlay:
     type: "object"
     properties:

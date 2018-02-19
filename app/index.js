@@ -12,11 +12,13 @@ var express = require('express');
 var app = express();
 const routes = require('./routes');
 let vmix = require('./services/vmix');
+var bodyParser = require('body-parser')
 
 if (config.vmix_rest_api.remote_access.enabled) {
     require('./remoteAccess').connect();
 }
 
+app.use(bodyParser.json());
 app.use(function (req, res, next) {
     if (!config.vmix_rest_api.vmix_path) {
         res

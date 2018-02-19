@@ -38,12 +38,13 @@ const getData = () => {
     });
 };
 
-const execute = (functionName, inputId, value) => {
+const execute = ({functionName, inputId, selectedName, value}) => {
     // Execute what vMix calls a function
     const path = getVmixPath() + 
                 '?Function=' + encodeURIComponent(functionName) +
-                '&Input=' + encodeURIComponent(inputId) +
-                '&Value=' + encodeURIComponent(value);
+                (inputId ? '&Input=' + encodeURIComponent(inputId) : '') +
+                (value ? '&Value=' + encodeURIComponent(value) : '') +
+                (selectedName ? '&SelectedName=' + encodeURIComponent(selectedName) : '');
 
     return new Promise((resolve) => {
         request(path, function (error, response, xml) {

@@ -20,28 +20,32 @@ module.exports = async (req, res, next) => {
         return;
     }
 
-    if (req.query.transitionEffect) {
+    if (req.body.transitionEffect) {
         let transitionEffectIndex = transitionEffects.map((effect) => { return effect.toLowerCase();})
-                                        .indexOf(req.query.transitionEffect.toLowerCase());
+                                        .indexOf(req.body.transitionEffect.toLowerCase());
         if (transitionEffectIndex >= 0) {
             // Valid transition value also provided
             transitionEffect = transitionEffects[transitionEffectIndex];
         }
     }
 
-    const newIsActive = stringToBoolean(req.query.isActive);
-
-    if (typeof(newIsActive) === 'boolean' && newIsActive !== single.isActive) {
+    if (typeof(req.body.isActive) === 'boolean' && req.body.isActive !== single.isActive) {
         // Make active input preview and make preview active
-        if (newIsActive === true) {
+        if (req.body.isActive === true) {
             // Cut to this input
-            success = await vmixService.execute(transitionEffect ? transitionEffect : 'Cut', single.inputId);
+            success = await vmixService.execute({
+                functionName: transitionEffect ? transitionEffect : 'Cut',
+                inputId: single.inputId,
+            });
         }
         else {
             // Cut away from this input (to the preview -- I couldn't find
             // a simple way to just blank the active view without a fade
             // and without making a new input).
-            success = await vmixService.execute(transitionEffect ? transitionEffect : 'Cut', inputService.PREVIEW_INPUT_ID);
+            success = await vmixService.execute({
+                functionName: transitionEffect ? transitionEffect : 'Cut',
+                inputId: inputService.PREVIEW_INPUT_ID,
+            });
         }
 
         if (success) {
