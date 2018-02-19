@@ -39,25 +39,59 @@ paths:
               [
                 {
                   "inputId": 1,
-                  "type": "Xaml",
-                  "title": "NewsHD2.xaml",
-                  "state": "Paused",
-                  "position": 0,
-                  "duration": 0,
-                  "loop": false,
+                  "type": "ImageSequence",
+                  "title": "MVC-001F.JPG",
+                  "state": {
+                    "running": false,
+                    "paused": false,
+                    "completed": true
+                  },
                   "isActive": false,
-                  "isPreview": false
+                  "isPreview": true,
+                  "media": {
+                    "position": 0,
+                    "duration": 0,
+                    "loop": false,
+                    "muted": null,
+                    "volume": null,
+                    "balance": null,
+                    "solo": null,
+                    "audiobusses": null,
+                    "audioMeter": {
+                      "left": null,
+                      "right": null
+                    }
+                  },
+                  "list": null,
+                  "fields": []
                 },
                 {
                   "inputId": 2,
-                  "type": "Xaml",
-                  "title": "TimerClock.xaml",
-                  "state": "Paused",
-                  "position": 0,
-                  "duration": 0,
-                  "loop": false,
+                  "type": "VirtualSet",
+                  "title": "CircularStudio",
+                  "state": {
+                    "running": false,
+                    "paused": true,
+                    "completed": false
+                  },
                   "isActive": false,
-                  "isPreview": true
+                  "isPreview": false,
+                  "media": {
+                    "position": 0,
+                    "duration": 0,
+                    "loop": false,
+                    "muted": null,
+                    "volume": null,
+                    "balance": null,
+                    "solo": null,
+                    "audiobusses": null,
+                    "audioMeter": {
+                      "left": null,
+                      "right": null
+                    }
+                  },
+                  "list": null,
+                  "fields": []
                 }
               ]
         501:
@@ -83,15 +117,43 @@ paths:
           examples:
             application/json:
               {
-                "inputId": 1,
+                "inputId": 4,
                 "type": "Xaml",
-                "title": "NewsHD2.xaml",
-                "state": "Paused",
-                "position": 0,
-                "duration": 0,
-                "loop": false,
-                "isActive": false,
-                "isPreview": false
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": true,
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
               }
         501:
           description: "Unable to connect to vMix"
@@ -127,15 +189,43 @@ paths:
           examples:
             application/json:
               {
-                "inputId": 1,
+                "inputId": 4,
                 "type": "Xaml",
-                "title": "NewsHD2.xaml",
-                "state": "Paused",
-                "position": 0,
-                "duration": 0,
-                "loop": false,
-                "isActive": false,
-                "isPreview": false
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
+                "isActive": true,
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
               }
         501:
           description: "Unable to connect to vMix"
@@ -154,15 +244,43 @@ paths:
           examples:
             application/json:
               {
-                "inputId": 2,
+                "inputId": 4,
                 "type": "Xaml",
-                "title": "NewsHD2.xaml",
-                "state": "Paused",
-                "position": 0,
-                "duration": 0,
-                "loop": false,
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
                 "isActive": true,
-                "isPreview": false
+                "isPreview": false,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
               }
         204:
           description: "No active input found"
@@ -183,15 +301,43 @@ paths:
           examples:
             application/json:
               {
-                "inputId": 1,
+                "inputId": 4,
                 "type": "Xaml",
-                "title": "NewsHD2.xaml",
-                "state": "Paused",
-                "position": 0,
-                "duration": 0,
-                "loop": false,
+                "title": "NewsHD.xaml",
+                "state": {
+                  "running": false,
+                  "paused": true,
+                  "completed": false
+                },
                 "isActive": false,
-                "isPreview": true
+                "isPreview": true,
+                "media": {
+                  "position": 0,
+                  "duration": 0,
+                  "loop": false,
+                  "muted": null,
+                  "volume": null,
+                  "balance": null,
+                  "solo": null,
+                  "audiobusses": null,
+                  "audioMeter": {
+                    "left": null,
+                    "right": null
+                  }
+                },
+                "list": null,
+                "fields": [
+                  {
+                    "fieldId": "Headline",
+                    "type": "text",
+                    "text": "News Brief"
+                  },
+                  {
+                    "fieldId": "Description",
+                    "type": "text",
+                    "text": "January 1, 2020"
+                  }
+                ]
               }
         204:
           description: "No preview input found"
@@ -223,12 +369,12 @@ paths:
                 {
                   "fieldId": "Headline",
                   "type": "text",
-                  "text": "Breaking News"
+                  "text": "News Brief"
                 },
                 {
                   "fieldId": "Description",
                   "type": "text",
-                  "text": "Some text about the breaking news here"
+                  "text": "January 1, 2020"
                 }
               ]
         501:
@@ -261,7 +407,7 @@ paths:
               {
                 "fieldId": "Headline",
                 "type": "text",
-                "text": "Breaking News"
+                "text": "News Brief"
               }
         501:
           description: "Unable to connect to vMix"
